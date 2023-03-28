@@ -24,7 +24,7 @@ const winner = mac => {
 	} else if(mac['Home Team Goals'] < mac['Away Team Goals']){
 		return `Kazanan Takım: ${mac['Away Team Name']}`;
 	} else{
-		return mac['Win conditions'];
+		return `Kazanan Takım: ${mac['Win conditions'].split(" win")[0]}` 
 	}
 };
 console.log(winner(finalMaci2014));
@@ -73,7 +73,7 @@ function Kazananlar(array, finallerFonksiyonu) {
 		} else if (mac['Home Team Goals'] < mac['Away Team Goals']) {
 		return mac['Away Team Name'];
 		} else {
-		return mac['Win conditions'].split(" win")[0];
+		return mac['Win conditions'].split(" win")[0]; //Beraberlik durumu dahil edilmiştir.
 		}
 		});
 		return kazananlar;	
@@ -218,6 +218,32 @@ function EnKotuDefans(array) {
 
 
 /* Hala vaktiniz varsa, README dosyasında listelenen hedeflerden istediğinizi aşağıdaki boşluğa yazabilirsiniz. */
+// Madde 1
+function DunyaKupasindaYerAlmaSayisi(takimKisaltmasi){
+	const maclar = fifaData.filter(mac => mac['Home Team Initials'] == takimKisaltmasi || mac['Away Team Initials'] == takimKisaltmasi);
+	return maclar.length;
+}
+//console.log(DunyaKupasindaYerAlmaSayisi("TUR"));
+
+
+// Madde 2
+// 'Finaller' veri setinde beraberlik durumları ilk committe dahil edilmiştir.
+
+
+// Madde 3
+function DunyaKupasindaAtilanGolSayisi(takimKisaltmasi){
+	const maclar = fifaData.filter(mac => mac['Home Team Initials'] == takimKisaltmasi || mac['Away Team Initials'] == takimKisaltmasi);
+	let golSayisi = 0;
+	maclar.forEach(mac => {
+		if(mac['Home Team Initials'] == takimKisaltmasi){
+			golSayisi += mac['Home Team Goals'];
+		} else if(mac['Away Team Initials'] == takimKisaltmasi){
+			golSayisi += mac['Away Team Goals'];
+		}
+	});
+	return golSayisi;
+}
+//console.log(DunyaKupasindaAtilanGolSayisi("TUR"));
 
 
 /* Bu satırın aşağısındaki kodları lütfen değiştirmeyin */
